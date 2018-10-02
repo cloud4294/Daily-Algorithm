@@ -4,7 +4,7 @@ import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
 /*
- * Baekjoon Online Judge 2858¹ø - ±â¼÷»ç ¹Ù´Ú
+ * Baekjoon Online Judge 2858ë²ˆ - ê¸°ìˆ™ì‚¬ ë°”ë‹¥
  * 
  * https://www.acmicpc.net/problem/2858
  * 

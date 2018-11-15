@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 /*
- *   Baekjoon Online Judge 16396번 - 선 그리기
+ *   Baekjoon Online Judge 2676번 - 라스칼 삼각형
  * 
  *   https://www.acmicpc.net/problem/2676
  */

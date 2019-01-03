@@ -3,103 +3,70 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
-/*
- * 	 Baekjoon Online Judge 14503번 - 로봇 청소기
- * 
- *   https://www.acmicpc.net/problem/14503
- * 
- */
-
 public class Main14503 {
 
 	static int N;
 	static int M;
 	static int[][] map;
-
+	static int[] my = { -1, 0, 1, 0 };
+	static int[] mx = { 0, -1, 0, 1 };
 	static int count;
 
-	static void solve(int r, int c, int d) {
+	public static void solve(int r, int c, int d) {
 		if (map[r][c] == 0) {
 			map[r][c] = 2;
 			count++;
+		} // 청소되지않았았다면 2로 체크하고 count 증가 
+
+		for (int i = 1; i <= 4; i++) {
+
+			int nd = (d + i) % 4;
+			int ny = r + my[nd];
+			int nx = c + mx[nd];
+			if (map[ny][nx] == 0) {
+				solve(ny, nx, nd);
+				return;
+			} // 다음지역의 청소가 되지 않았다면 재귀호출 
 		}
+		int dir = (d + 2) % 4; // 뒤로가는 방향
 
-		if (c - 1 >= 0 && c + 1 < M && r - 1 >= 0 && r + 1 < N) {
-			if (map[r][c - 1] != 0 && map[r][c + 1] != 0 && map[r + 1][c] != 0 && map[r - 1][c] != 0) {
-				if (d == 0) {
-					if (map[r + 1][c] == 1)
-						return;
-					solve(r + 1, c, 0);
-				} else if (d == 1) {
-					if (map[r][c - 1] == 1)
-						return;
+		if (map[r + my[dir]][c + mx[dir]] != 1) {
+			solve(r + my[dir], c + mx[dir], d);
+			return;
+		} // 뒤로가는 방향이 벽이 아니라면 재귀호출
+		
+		return; //작동을 멈춤
 
-					solve(r, c - 1, 1);
-				} else if (d == 2) {
-					if (map[r - 1][c] == 1)
-						return;
-
-					solve(r - 1, c, 2);
-				} else if (d == 3) {
-					if (map[r][c + 1] == 1)
-						return;
-
-					solve(r, c + 1, 3);
-				}
-			}
-			else if (d == 0) {
-				if (c - 1 >= 0 && map[r][c - 1] == 0) {
-					solve(r, c - 1, 3);
-				} else if (c - 1 >= 0) {
-					solve(r, c, 3);
-				}
-			} else if (d == 1) {
-				if (r - 1 >= 0 && map[r - 1][c] == 0) {
-					solve(r - 1, c, 0);
-				} else if (r - 1 >= 0) {
-					solve(r, c, 0);
-				}
-				
-			} else if (d == 2) {
-				if (c + 1 < M && map[r][c + 1] == 0) {
-					solve(r, c + 1, 1);
-				} else if (c + 1 < M) {
-					solve(r, c, 1);
-				}
-			} else if (d == 3) {
-				if (r + 1 < N && map[r + 1][c] == 0) {
-					solve(r + 1, c, 2);
-				} else if (r + 1 < N) {
-					solve(r, c, 2);
-				}
-				
-			}
-		}
-
-	} // 재귀를 이용한 dfs 구현
+	}
 
 	public static void main(String[] args) throws IOException {
-		// TODO Auto-generated method stub
+
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+
+		StringTokenizer st = new StringTokenizer(br.readLine());
 		N = Integer.parseInt(st.nextToken());
 		M = Integer.parseInt(st.nextToken());
+		map = new int[N][M];
+		count = 0;
 
-		st = new StringTokenizer(br.readLine(), " ");
+		st = new StringTokenizer(br.readLine());
 		int r = Integer.parseInt(st.nextToken());
 		int c = Integer.parseInt(st.nextToken());
 		int d = Integer.parseInt(st.nextToken());
-		map = new int[N][M];
+
 		for (int i = 0; i < N; i++) {
-			st = new StringTokenizer(br.readLine(), " ");
+			st = new StringTokenizer(br.readLine());
 			for (int j = 0; j < M; j++) {
 				map[i][j] = Integer.parseInt(st.nextToken());
 			}
-		}
+		} // 지도 초기화
+		if (d % 2 == 1) {
+			d = (d + 2) % 4;
+		} // 회전방향과 초기 방향이 다르므로 뒤집어야한다.
 		solve(r, c, d);
-		
 
 		System.out.println(count);
+
 	}
 
 }

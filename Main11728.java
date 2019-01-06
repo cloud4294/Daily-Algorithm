@@ -5,7 +5,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.util.StringTokenizer;
 /*
- * 		Baekjoon Online Judge 2698번 - 인접한 비트의 개수
+ * 		Baekjoon Online Judge 11728번 - 배열 합치기
  * 
  * 		https://www.acmicpc.net/problem/11728
  */

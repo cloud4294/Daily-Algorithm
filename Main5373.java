@@ -3,6 +3,12 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 
+/*
+ * 		Baekjoon Online Judge 5373¹ø - Å¥ºù
+ * 
+ * 		https://www.acmicpc.net/problem/5373
+ */
+
 public class Main5373 {
 
 	static char[][][] cube;
